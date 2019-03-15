@@ -1,3 +1,8 @@
+
+library(readr)
+results <- read_csv("results.csv")
+View(results)
+
 results <- results
 
 str(results)
@@ -120,7 +125,8 @@ ggplot(top_5_by_era, aes(era, n)) +
 #The USA could be considered one of the most successful teams between 1990 and 2018 based purely on wins, but it hasn't translated to huge success across all tournaments
 
 
-
+no_friendlies <- results2 %>%
+  filter(tournament != 'Friendly')
 
 
 results2 %>%
@@ -185,7 +191,6 @@ view(score_med_era)
 #Across all eras though scoring decreased and defenses appeared to get better
 #The only time there was an increase in scoring from both sides was between 1930-1960
 
-home_team_stats <- home_team_sum
 
 home_results_era <- results2 %>%
   group_by(era) %>%
@@ -233,6 +238,8 @@ results_by_era %>%
 #Which countries host the most matches where they themselves are not participating in?
 
 
+
+
 neutral_games <- results2 %>%
   group_by(country, neutral) %>%
   count() %>%
@@ -242,8 +249,7 @@ neutral_games <- results2 %>%
 #Based on every game played (regardless of tournament)  the USA hosts the most games
 #and Malaysia hosts the 2nd most amount of games they don't participate in
 
-no_friendlies <- results2 %>%
-  filter(tournament != 'Friendly')
+
 
 neutral_games_tournament <- no_friendlies %>%
   group_by(country, neutral) %>%
