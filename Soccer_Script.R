@@ -15,7 +15,9 @@ results$tournament <- as.factor(results$tournament)
 unique(results$tournament)
 
 
-#Question 1
+#Question 1 
+#Who are the most successful teams of all time?
+
 #Create a winners column based on the result
 results$winner <- ifelse(results$home_score > results$away_score, results$home_team, results$away_team)
 
@@ -39,12 +41,15 @@ most_successful_countries <- most_successful_countries %>%
   arrange(desc(n))
 
 head(n = 5, most_successful_countries)
-  #From looking at the top 5 teams with the most wins, Brazil appears to be the best team of all time followed by England, Germany, Argentina, and Sweden.
+  #From looking at the top 5 teams with the most wins, Brazil appears to be the best team of all time followed by England, Germany, 
+  #Argentina, and Sweden.
 
 
 
 
-#Question 2
+#Question 2 
+#Who have been the best teams throughout specific eras of football?
+
 #Function to round to the floor of the decade
 floor_decade <- function(value){ return(value - value %% 10) }
 
@@ -122,7 +127,8 @@ ggplot(top_5_by_era, aes(era, n)) +
 
 #However, does strictly looking at wins predict team success (World Cup Wins, European Championship Wins, etc.)? 
 #I would argue for most countries that is not the case since they play against weaker countries and weaker squads in most friendlies.
-#The USA could be considered one of the most successful teams between 1990 and 2018 based purely on wins, but it hasn't translated to huge success across all tournaments
+#The USA could be considered one of the most successful teams between 1990 and 2018 based purely on wins, but it hasn't translated to 
+#success across major tournaments
 
 
 no_friendlies <- results2 %>%
@@ -156,7 +162,10 @@ ggplot(top_5_no_friendlies, aes(era, n)) +
 #As a whole it's difficult to look at each tournament and say they are all the same. 
 #Each tournament has different levels of difficulty due to the participants in the tournament and their respective qualifying group
 
-#Question 3, changes throughout the era on home advantage, total goals scored, distribution of teams' strength etc
+
+
+#Question 3
+#What changes throughout the era are there on home advantage, total goals scored, distribution of teams' strength etc
 
 
 results2$home_winner <- ifelse(results2$winner == results2$home_team, "Win", "Loss")
@@ -207,7 +216,8 @@ ggplot(home_results_era, aes(era, pct_time, color = home_result, shape = home_re
 #The home team lost outright less through the eras and more draws occured 
 
 #Question 4
-#Can we say anything about geopolitics from football fixtures - how has the number of countries changed, which teams like to play each other
+#Can we say anything about geopolitics from football fixtures - how has the number of countries changed, which teams like to play 
+#each other
 
 
 #Creates a table that shows how often the teams played
@@ -236,8 +246,6 @@ results_by_era %>%
 
 #Question 5
 #Which countries host the most matches where they themselves are not participating in?
-
-
 
 
 neutral_games <- results2 %>%
